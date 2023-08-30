@@ -4,33 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Chat Application</title>
+    <title>Chat Application - Chat</title>
 </head>
 
 <body>
-    <!-- Login Section -->
-    <div id="login-container" class="container">
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button id="login-btn">Login</button>
-    </div>
-
     <!-- Chat Section -->
-    <div id="chat-container" class="container hidden">
-        <h2>Welcome to the Chat<span id="user-username"></span>!</h2>
+    <div id="chat-container" class="container">
+        <h2>Welcome to Chat <span id="user-username"></span>!</h2>
         <div id="chat-messages"></div>
         <input type="text" id="message" placeholder="Type your message...">
         <button id="send-btn">Send</button>
         <button id="logout-btn">Logout</button>
     </div>
-
-
-
-
-
     <script src="app.js"></script>
 </body>
 

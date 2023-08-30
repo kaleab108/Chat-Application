@@ -29,26 +29,85 @@ const users = [
 ];
 
 let currentUser = null;
+// Function to handle user login
+function handleLogin(username, password) {
+    // Check if a user with the provided username and password exists
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+        // Successful login
+        currentUser = user;
+        alert(`Welcome, ${currentUser.username}!`);
+        loginContainer.classList.add("hidden");
+        chatContainer.classList.remove("hidden");
+        userUsername.textContent = currentUser.username;
+    } else {
+        // Failed login
+        alert("Invalid username or password. Please try again.");
+    }
+}
 
 // Login button click event
 loginBtn.addEventListener("click", () => {
     const enteredUsername = usernameInput.value;
     const enteredPassword = passwordInput.value;
 
-    // Check if the entered credentials are valid (replace with your authentication logic)
-    const user = users.find(u => u.username === enteredUsername && u.password === enteredPassword);
+    if (enteredUsername && enteredPassword) {
+        handleLogin(enteredUsername, enteredPassword);
+        // Clear login inputs
+        usernameInput.value = "";
+        passwordInput.value = "";
+    } else {
+        alert("Username and password are required.");
+    }
+});
+
+// ... (previous JavaScript code) ...
+
+// Function to handle user login
+function handleLogin(username, password) {
+    // Check if a user with the provided username and password exists
+    const user = users.find(u => u.username === username && u.password === password);
 
     if (user) {
         // Successful login
         currentUser = user;
+        alert(`Welcome, ${currentUser.username}!`);
         loginContainer.classList.add("hidden");
         chatContainer.classList.remove("hidden");
         userUsername.textContent = currentUser.username;
+
+        // Redirect to chat.html after successful login
+        window.location.href = "chat.html";
     } else {
         // Failed login
-        alert("Invalid username or password.");
+        alert("Invalid username or password. Please try again.");
     }
-});
+}
+
+
+
+// ... (previous JavaScript code) ...
+
+// Function to add a new message to the chat
+function addMessage(username, message) {
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", "new-message");
+    messageDiv.innerHTML = `<p><strong>${username}:</strong> ${message}</p>`;
+    chatMessages.appendChild(messageDiv);
+
+    // Scroll to the bottom to show the new message
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Remove the "new-message" class after the animation
+    setTimeout(() => {
+        messageDiv.classList.remove("new-message");
+    }, 500); // The same duration as the animation (0.5 seconds)
+}
+
+// ... (the rest of your code) ...
+
+
 
 // Send button click event (simulated chat functionality)
 sendBtn.addEventListener("click", () => {
