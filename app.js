@@ -5,10 +5,14 @@ const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("login-btn");
 const userUsername = document.getElementById("user-username");
-const chatMessages = document.getElementById("chat-messages");
+const chatMessagesContainer = document.getElementById("chat-messages");
 const messageInput = document.getElementById("message");
-const sendBtn = document.getElementById("send-btn");
-const logoutBtn = document.getElementById("logout-btn");
+const \sendButton = document.getElementById("send-btn");
+const logoutButton = document.getElementById("logout-btn");
+
+
+
+
 
 // Simulated user data (replace with your authentication logic)
 const users = [
@@ -16,16 +20,7 @@ const users = [
     { username: "user2", password: "password2" },
     { username: "user3", password: "password3" },
     { username: "user4", password: "password4" },
-    { username: "user5", password: "password5" },
-    { username: "user6", password: "password6" },
-    { username: "user7", password: "password7" },
-    { username: "user8", password: "password8" },
-    { username: "user9", password: "password9" },
-    { username: "user10", password: "password10" },
-    { username: "user11", password: "password11" },
-    { username: "user12", password: "password12" },
-    { username: "user13", password: "password13" },
-    { username: "user14", password: "password14" },
+    { username: "user5", password: "password5" }
 ];
 
 let currentUser = null;
@@ -62,7 +57,7 @@ loginBtn.addEventListener("click", () => {
     }
 });
 
-// ... (previous JavaScript code) ...
+// ... (Login in phase) ...
 
 // Function to handle user login
 function handleLogin(username, password) {
@@ -87,7 +82,6 @@ function handleLogin(username, password) {
 
 
 
-// ... (previous JavaScript code) ...
 
 // Function to add a new message to the chat
 function addMessage(username, message) {
@@ -130,3 +124,56 @@ logoutBtn.addEventListener("click", () => {
     chatMessages.innerHTML = "";
 });
 
+sendButton.addEventListener("click", () => {
+    // Get the message text from the input field
+    const messageText = messageInput.value.trim();
+
+    if (messageText !== "") {
+        // Create a new message element for the recipient
+        const recipientMessageDiv = document.createElement("div");
+        recipientMessageDiv.classList.add("message", "incoming");
+        recipientMessageDiv.innerHTML = `<p><strong>${otherUser.username}:</strong> ${messageText}</p>`;
+
+        // Create a new message element for the sender
+        const senderMessageDiv = document.createElement("div");
+        senderMessageDiv.classList.add("message", "outgoing");
+        senderMessageDiv.innerHTML = `<p><strong>${currentUser.username}:</strong> ${messageText}</p>`;
+
+        // Append both messages to the chat messages container
+        chatMessagesContainer.appendChild(recipientMessageDiv);
+        chatMessagesContainer.appendChild(senderMessageDiv);
+
+        // Clear the input field
+        messageInput.value = "";
+
+        // Scroll to the bottom to show the new messages
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+    }
+});
+
+// Function to add a message to the chat container
+function addMessageToChat(sender, messageText) {
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", sender === currentUser ? "outgoing" : "incoming");
+    messageDiv.innerHTML = `<p><strong>${sender.username}:</strong> ${messageText}</p>`;
+
+    // Append the message to the chat messages container
+    chatMessagesContainer.appendChild(messageDiv);
+
+    // Scroll to the bottom to show the new message
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+}
+
+// Event listener for sending a message
+sendButton.addEventListener("click", () => {
+    // Get the message text from the input field
+    const messageText = messageInput.value.trim();
+
+    if (messageText !== "") {
+        // Add the message to the chat container with the sender's username
+        addMessageToChat(currentUser, messageText);
+
+        // Clear the input field
+        messageInput.value = "";
+    }
+});
