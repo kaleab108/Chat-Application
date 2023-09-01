@@ -7,7 +7,7 @@ const loginBtn = document.getElementById("login-btn");
 const userUsername = document.getElementById("user-username");
 const chatMessagesContainer = document.getElementById("chat-messages");
 const messageInput = document.getElementById("message");
-const \sendButton = document.getElementById("send-btn");
+const sendButton = document.getElementById("send-btn");
 const logoutButton = document.getElementById("logout-btn");
 
 
@@ -80,77 +80,6 @@ function handleLogin(username, password) {
     }
 }
 
-
-
-
-// Function to add a new message to the chat
-function addMessage(username, message) {
-    const messageDiv = document.createElement("div");
-    messageDiv.classList.add("message", "new-message");
-    messageDiv.innerHTML = `<p><strong>${username}:</strong> ${message}</p>`;
-    chatMessages.appendChild(messageDiv);
-
-    // Scroll to the bottom to show the new message
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    // Remove the "new-message" class after the animation
-    setTimeout(() => {
-        messageDiv.classList.remove("new-message");
-    }, 500); // The same duration as the animation (0.5 seconds)
-}
-
-// ... (the rest of your code) ...
-
-
-
-// Send button click event (simulated chat functionality)
-sendBtn.addEventListener("click", () => {
-    const message = messageInput.value;
-    if (message.trim() !== "") {
-        // Append the message to the chat
-        chatMessages.innerHTML += `<p>${currentUser.username}: ${message}</p>`;
-        // Clear the message input
-        messageInput.value = "";
-    }
-});
-
-// Logout button click event
-logoutBtn.addEventListener("click", () => {
-    currentUser = null;
-    loginContainer.classList.remove("hidden");
-    chatContainer.classList.add("hidden");
-    usernameInput.value = "";
-    passwordInput.value = "";
-    chatMessages.innerHTML = "";
-});
-
-sendButton.addEventListener("click", () => {
-    // Get the message text from the input field
-    const messageText = messageInput.value.trim();
-
-    if (messageText !== "") {
-        // Create a new message element for the recipient
-        const recipientMessageDiv = document.createElement("div");
-        recipientMessageDiv.classList.add("message", "incoming");
-        recipientMessageDiv.innerHTML = `<p><strong>${otherUser.username}:</strong> ${messageText}</p>`;
-
-        // Create a new message element for the sender
-        const senderMessageDiv = document.createElement("div");
-        senderMessageDiv.classList.add("message", "outgoing");
-        senderMessageDiv.innerHTML = `<p><strong>${currentUser.username}:</strong> ${messageText}</p>`;
-
-        // Append both messages to the chat messages container
-        chatMessagesContainer.appendChild(recipientMessageDiv);
-        chatMessagesContainer.appendChild(senderMessageDiv);
-
-        // Clear the input field
-        messageInput.value = "";
-
-        // Scroll to the bottom to show the new messages
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-    }
-});
-
 // Function to add a message to the chat container
 function addMessageToChat(sender, messageText) {
     const messageDiv = document.createElement("div");
@@ -176,4 +105,14 @@ sendButton.addEventListener("click", () => {
         // Clear the input field
         messageInput.value = "";
     }
+});// Function to handle logout
+function logout() {
+    // You can perform any necessary logout actions here, such as clearing user data or session
+    // Redirect the user back to the login screen (you should replace 'login.html' with your actual login page)
+    window.location.href = "login.html";
+}
+
+// Event listener for logging out
+logoutButton.addEventListener("click", () => {
+    logout();
 });

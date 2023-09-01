@@ -6,17 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Chat Application - Chat</title>
+    <title> Chat Application -Chat</title>
 </head>
 
 <body>
     <!-- Chat Section -->
-    <div id="chat-container" class="container">
-        <h2>Welcome to Chat <span id="user-username"></span>!</h2>
-        <div id="chat-messages"></div>
-        <input type="text" id="message" placeholder="Type your message...">
-        <button id="send-btn">Send</button>
-        <button id="logout-btn">Logout</button>
+    <div class="chat-container">
+        <div class="chat-header">
+            <a href="#" id="logout-btn">Logout</a>
+            <h1>Chat Application</h1>
+
+        </div>
+        <div class="chat-messages-container" id="chat-messages">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="message" placeholder="Type your message...">
+            <button id="send-btn">Send</button>
+        </div>
     </div>
     <script src="app.js"></script>
 </body>
