@@ -80,6 +80,8 @@ function handleLogin(username, password) {
     }
 }
 
+
+
 // Function to add a message to the chat container
 function addMessageToChat(sender, messageText) {
     const messageDiv = document.createElement("div");
@@ -93,31 +95,7 @@ function addMessageToChat(sender, messageText) {
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 }
 
-// Event listener for sending a message
-sendButton.addEventListener("click", () => {
-    // Get the message text from the input field
-    const messageText = messageInput.value.trim();
 
-    if (messageText !== "") {
-        // Add the message to the chat container with the sender's username
-        addMessageToChat(currentUser, messageText);
-
-        // Clear the input field
-        messageInput.value = "";
-    }
-});// Function to handle logout
-function logout() {
-    // You can perform any necessary logout actions here, such as clearing user data or session
-    // Redirect the user back to the login screen (you should replace 'login.html' with your actual login page)
-    window.location.href = "login.html";
-}
-
-// Event listener for logging out
-logoutButton.addEventListener("click", () => {
-    logout();
-});
-
-// ... (previous code)
 
 // Function to send a message
 function sendMessage(messageText) {
@@ -130,6 +108,31 @@ function sendMessage(messageText) {
     socket.emit('message', message);
 }
 
+
+
+sendButton.addEventListener('click', () => {
+    const messageInput = document.getElementById('message');
+    const messageText = messageInput.value.trim();
+
+    if (messageText !== '') {
+        sendMessage(messageText);
+        messageInput.value = '';
+    }
+});
+
+
+
+// Function to handle logout
+function logout() {
+    // You can perform any necessary logout actions here, such as clearing user data or session
+    // Redirect the user back to the login screen (you should replace 'login.html' with your actual login page)
+    window.location.href = "login.html";
+}
+
+// Event listener for logging out
+logoutButton.addEventListener("click", () => {
+    logout();
+});
 // Event listener for sending a message when the 'Send' button is clicked
 sendButton.addEventListener('click', () => {
     const messageInput = document.getElementById('message');
