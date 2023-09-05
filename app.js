@@ -116,3 +116,29 @@ function logout() {
 logoutButton.addEventListener("click", () => {
     logout();
 });
+
+// ... (previous code)
+
+// Function to send a message
+function sendMessage(messageText) {
+    const message = {
+        sender: currentUser.username,
+        text: messageText,
+    };
+
+    // Emit the message to the server
+    socket.emit('message', message);
+}
+
+// Event listener for sending a message when the 'Send' button is clicked
+sendButton.addEventListener('click', () => {
+    const messageInput = document.getElementById('message');
+    const messageText = messageInput.value.trim();
+
+    if (messageText !== '') {
+        sendMessage(messageText);
+        messageInput.value = '';
+    }
+});
+
+// ... (remaining code)
