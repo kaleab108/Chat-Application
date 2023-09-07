@@ -7,8 +7,6 @@ const logoutButton = document.getElementById("logout-btn");
 
 
 
-
-
 // Function to add a message to the chat container
 function addMessageToChat(sender, messageText) {
     const messageDiv = document.createElement("div");
