@@ -191,6 +191,8 @@ input[type="password"] {
     color: #121212;
     margin-top: 10px;
     transition: background-color 0.3s ease;
+    font-weight: bold;
+    font-style: italic;
 }
 
 input[type="text"]:focus,

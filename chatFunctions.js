@@ -1,10 +1,3 @@
-import { addMessageToChat, sendMessage, indicateUserActivity } from "./chatFunctions.js";
-
-// Use the functions in your app.js as needed
-const currentUser = { username: "user1" };
-const otherUser = { username: "user2" };
-
-
 const chatMessagesContainer = document.getElementById("chat-messages");
 const messageInput = document.getElementById("message");
 const sendButton = document.getElementById("send-btn");
@@ -62,6 +55,8 @@ function logout() {
     // You can also add console logs to check if the function is called
     console.log("User has logged out."); // Log for debugging
 }
+
+
 // Function to indicate user activity (e.g., "user is typing...")
 function indicateUserActivity() {
     // Display the user activity indication (e.g., "User is typing...")

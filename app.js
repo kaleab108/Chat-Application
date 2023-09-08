@@ -1,11 +1,10 @@
 // DOM elements
 const loginContainer = document.getElementById("login-container");
-const chatContainer = document.getElementById("chat-container");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("login-btn");
 const userUsername = document.getElementById("user-username");
-
+const showPasswordButton = document.getElementById("show-password-button");
 
 
 
@@ -48,6 +47,23 @@ loginBtn.addEventListener("click", () => {
         alert("Username and password are required.");
     }
 });
+
+
+
+// Function to toggle password visibility
+function togglePasswordVisibility() {
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        showPasswordButton.textContent = "Hide Password";
+    } else {
+        passwordInput.type = "password";
+        showPasswordButton.textContent = "Show Password";
+    }
+}
+
+// Event listener for the "Show Password" button
+showPasswordButton.addEventListener("click", togglePasswordVisibility);
+
 
 // ... (Login in phase) ...
 
