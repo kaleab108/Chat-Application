@@ -11,6 +11,11 @@ const sendButton = document.getElementById("send-btn");
 const logoutButton = document.getElementById("logout-btn");
 
 
+// Use the functions in your app.js as needed
+const currentUser = { username: "user1" };
+const otherUser = { username: "user2" };
+
+
 // Timeout ID to clear the user activity indication
 let typingTimeout;
 
