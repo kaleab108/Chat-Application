@@ -1,5 +1,6 @@
 // DOM elements
 const loginContainer = document.getElementById("login-container");
+const chatContainer = document.getElementById("chat-container");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("login-btn");
