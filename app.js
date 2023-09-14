@@ -1,3 +1,4 @@
+
 // DOM elements
 const loginContainer = document.getElementById("login-container");
 const chatContainer = document.getElementById("chat-container");

@@ -1,5 +1,4 @@
 const chatMessagesContainer = document.getElementById("chat-messages");
-const messageInput = document.getElementById("message");
 const sendButton = document.getElementById("send-btn");
 const logoutButton = document.getElementById("logout-btn");
 
@@ -25,7 +24,18 @@ function addMessageToChat(sender, messageText) {
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 }
 
+// Function to display stored messages when the chat loads
+function displayStoredMessages() {
+    const storedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
 
+    storedMessages.forEach((message) => {
+        const sender = { username: message.sender };
+        addMessageToChat(sender, message.text);
+    });
+}
+
+// Call the displayStoredMessages function when the chat loads
+window.addEventListener('load', displayStoredMessages);
 
 // Function to send a message
 function sendMessage(messageText) {
@@ -69,6 +79,10 @@ function indicateUserActivity() {
         activityIndicator.textContent = "";
     }, 3000); // Delay in milliseconds
 }
+// Event listener for detecting user typing
+messageInput.addEventListener("input", () => {
+    indicateUserActivity();
+});
 
 sendButton.addEventListener('click', () => {
     const messageInput = document.getElementById('message');
@@ -80,10 +94,6 @@ sendButton.addEventListener('click', () => {
     }
 });
 
-// Event listener for detecting user typing
-messageInput.addEventListener("input", () => {
-    indicateUserActivity();
-});
 
 // Event listener for logging out
 logoutButton.addEventListener("click", () => {
@@ -97,3 +107,42 @@ export {
     sendMessage,
     indicateUserActivity,
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Event listener setup code here
+});
+
+
+// local storage
+
+// Function to send a message
+function sendMessage(messageText) {
+    const message = {
+        sender: currentUser.username,
+        text: messageText,
+        timestamp: new Date().toLocaleString(), // You can use a more precise timestamp
+    };
+
+    // Add the message to the chat container with the sender's username
+    addMessageToChat(currentUser, message.text);
+
+    // Store the message in localStorage (you can replace this with a backend database)
+    const storedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+    storedMessages.push(message);
+    localStorage.setItem('chatMessages', JSON.stringify(storedMessages));
+
+    // Clear the input field
+    messageInput.value = "";
+}
+
+// Function to retrieve and display stored messages when the chat loads
+function displayStoredMessages() {
+    const storedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+
+    storedMessages.forEach((message) => {
+        addMessageToChat({ username: message.sender }, message.text);
+    });
+}
+
+// Call the displayStoredMessages function when the chat loads
+window.addEventListener('load', displayStoredMessages);
